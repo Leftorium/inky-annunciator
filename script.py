@@ -7,7 +7,6 @@ from font_fredoka_one import FredokaOne
 response = requests.get('https://dm-devci-annunciator-services.azurewebsites.net/api/Message/message/0/current')
 data = response.json()
 message = data['slides'][0]['lines'][0]['content']
-
 # Inky section shamelessly stolen from their guide https://learn.pimoroni.com/tutorial/sandyj/getting-started-with-inky-phat
 inkyphat = InkyPHAT('red')
 img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
