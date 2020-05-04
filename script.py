@@ -6,8 +6,8 @@ from font_fredoka_one import FredokaOne
 # Get the current message on the annunciator
 response = requests.get('https://dm-devci-annunciator-services.azurewebsites.net/api/Message/message/0/current')
 data = response.json()
-totalMess = len(data['slides'][0]['lines'])
 currentCommons = data['slides'][0]['lines']
+totalMess = len(currentCommons)
 messagePayload = totalMess - 1
 i = 0
 holder = []
