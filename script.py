@@ -6,7 +6,15 @@ from font_fredoka_one import FredokaOne
 # Get the current message on the annunciator
 response = requests.get('https://dm-devci-annunciator-services.azurewebsites.net/api/Message/message/0/current')
 data = response.json()
-message = data['slides'][0]['lines'][0]['content']
+totalMess = len(data['slides'][0]['lines'])
+currentCommons = data['slides'][0]['lines']
+messagePayload = totalMess - 1
+i = 0
+holder = []
+while messagePayload > i:
+    holder.append(data['slides'][0]['lines'][i]['content'])
+    i += 1
+message = ' '.join(holder).title()
 # Inky section shamelessly stolen from their guide https://learn.pimoroni.com/tutorial/sandyj/getting-started-with-inky-phat
 inkyphat = InkyPHAT('red')
 img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
