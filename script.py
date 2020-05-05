@@ -17,6 +17,7 @@ while messagePayload > i:
 message = ' '.join(holder).title()
 # Inky section shamelessly stolen from their guide https://learn.pimoroni.com/tutorial/sandyj/getting-started-with-inky-phat
 inkyphat = InkyPHAT('red')
+inky_display = InkyPHAT(colour)
 img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
 draw = ImageDraw.Draw(img)
 font = ImageFont.truetype(FredokaOne, 22)
