@@ -15,9 +15,10 @@ while messagePayload > i:
     holder.append(data['slides'][0]['lines'][i]['content'])
     i += 1
 message = ' '.join(holder).title()
+
 # Inky section shamelessly stolen from their guide https://learn.pimoroni.com/tutorial/sandyj/getting-started-with-inky-phat
-inkyphat = InkyPHAT('red')
-inky_display = InkyPHAT('red')
+inky_display = InkyPHAT("red")
+inky_display.set_border(inky_display.WHITE)
 img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
 draw = ImageDraw.Draw(img)
 font = ImageFont.truetype(FredokaOne, 22)
