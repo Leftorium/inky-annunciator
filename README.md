@@ -6,8 +6,8 @@ Takes data from the [annunciator API](https://dm-devci-annunciator-services.azur
 
 To run the script in the background at boot add the following to `crontab`
 
-`@reboot /usr/bin/python3 /home/pi/inky-annunciator/script.py &`
+`@reboot /usr/bin/python3 /home/pi/inky-annunicator/script.py &`
 
 And then rerun the script every minute to catch the new messages:
 
-`* * * * * /usr/bin/python3 /home/pi/inky-annunciator/script.py`
+`* * * * * /usr/bin/python3 /home/pi/inky-annunicator/script.py`
