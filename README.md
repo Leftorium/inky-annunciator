@@ -15,3 +15,5 @@ And then rerun the script every minute to catch the new messages:
 ## Flake8
 
 Flake8 is run against code pushed to `master` using this GitHub Action by [suo](https://github.com/suo): [flake8-github-action](https://github.com/suo/flake8-github-action)
+
+- Flake8 Rules: [The Big Ol' List of Rules](https://lintlyci.github.io/Flake8Rules/)
