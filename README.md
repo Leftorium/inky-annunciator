@@ -11,3 +11,7 @@ To run the script in the background at boot add the following to `crontab`
 And then rerun the script every minute to catch the new messages:
 
 `* * * * * /usr/bin/python3 /home/pi/inky-annunicator/script.py`
+
+## Flake8
+
+Flake8 is run against code pushed to `master` using this GitHub Action by [suo](https://github.com/suo): [flake8-github-action](https://github.com/suo/flake8-github-action)
