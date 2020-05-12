@@ -9,6 +9,7 @@ baseURLEnding = '/current'
 house = 0
 response = requests.get(baseURLStart + str(house) + baseURLEnding)
 data = response.json()
+style = data['slides'][0]['lines'][0]['style']
 
 def withMember():
     x = data['slides'][0]['lines']
@@ -33,7 +34,20 @@ def noMember():
     string = ' '.join(holder).title()
     return string
 
-if data['slides'][0]['lines'][-1]['member'] is None:
+def committeeMeetings():
+    x = data['slides'][0]['lines']
+    y = len(x)
+    i = 0
+    holder = []
+    while y > i:
+        holder.append(data['slides'][0]['lines'][i]['content'])
+        i += 2
+    string = ', '.join(holder).title()
+    return string
+
+if style == 16:
+    message = "Today's Committeess: " + committeeMeetings()
+elif data['slides'][0]['lines'][-1]['member'] is None:
     message = noMember()
 else:
     message = withMember()
