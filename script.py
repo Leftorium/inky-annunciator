@@ -11,6 +11,7 @@ response = requests.get(baseURLStart + str(house) + baseURLEnding)
 data = response.json()
 style = data['slides'][0]['lines'][0]['style']
 
+
 def withMember():
     x = data['slides'][0]['lines']
     y = len(x)
@@ -23,6 +24,7 @@ def withMember():
     string = ' '.join(holder).title()
     return string
 
+
 def noMember():
     x = data['slides'][0]['lines']
     y = len(x)
@@ -34,6 +36,7 @@ def noMember():
     string = ' '.join(holder).title()
     return string
 
+
 def committeeMeetings():
     x = data['slides'][0]['lines']
     y = len(x)
@@ -44,6 +47,7 @@ def committeeMeetings():
         i += 2
     string = ', '.join(holder).title()
     return string
+
 
 if style == 16:
     message = "Today's Committeess: " + committeeMeetings()
@@ -83,6 +87,8 @@ def reflow_text(quote, width, font):
     # reflowed = reflowed.rstrip() + '"'
 
     return reflowed
+
+
 reflowed_message = reflow_text(message, inky_display.WIDTH, font)
 draw.text((0, 0), reflowed_message, inky_display.BLACK, font)
 inky_display.set_image(img)
