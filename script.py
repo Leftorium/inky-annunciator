@@ -3,10 +3,11 @@ from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
 from font_fredoka_one import FredokaOne
 # Get the current message on the annunciator
-baseURLStart = 'https://dm-devci-annunciator-services.azurewebsites.net/api/Message/message/'
-baseURLEnding = '/current'
+baseURLhost = 'https://dm-devci-annunciator-services.azurewebsites.net'
+baseURLAPIBit = '/api/Message/message/'
+baseURLEnd = '/current'
 house = 0
-response = requests.get(baseURLStart + str(house) + baseURLEnding)
+response = requests.get(baseURLStart + baseURLAPIBit + str(house) + baseURLEnd)
 data = response.json()
 style = data['slides'][0]['lines'][0]['style']
 
@@ -55,7 +56,8 @@ elif data['slides'][0]['lines'][-1]['member'] is None:
 else:
     message = withMember()
 
-# Inky section shamelessly stolen from their guide https://learn.pimoroni.com/tutorial/sandyj/getting-started-with-inky-phat
+# Inky section shamelessly stolen from their guide
+# https://learn.pimoroni.com/tutorial/sandyj/getting-started-with-inky-phat
 inky_display = InkyPHAT("red")
 inky_display.set_border(inky_display.WHITE)
 img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
@@ -65,7 +67,8 @@ w, h = font.getsize(message)
 x = (inky_display.WIDTH / 2) - (w / 2)
 y = (inky_display.HEIGHT / 2) - (h / 2)
 
-# Reflow function from https://www.adambowie.com/blog/2019/09/news-twitter-feeds-and-inky-what-e-ink-display/
+# Reflow function from
+# https://github.com/pimoroni/inky/blob/master/examples/what/quotes-what.py
 
 def reflow_text(quote, width, font):
     words = quote.split(" ")
