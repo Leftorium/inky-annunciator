@@ -70,6 +70,7 @@ y = (inky_display.HEIGHT / 2) - (h / 2)
 # Reflow function from
 # https://github.com/pimoroni/inky/blob/master/examples/what/quotes-what.py
 
+
 def reflow_text(quote, width, font):
     words = quote.split(" ")
     reflowed = ' '
