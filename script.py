@@ -7,7 +7,7 @@ baseURLhost = 'https://dm-devci-annunciator-services.azurewebsites.net'
 baseURLAPIBit = '/api/Message/message/'
 baseURLEnd = '/current'
 house = 0
-response = requests.get(baseURLStart + baseURLAPIBit + str(house) + baseURLEnd)
+response = requests.get(baseURLhost + baseURLAPIBit + str(house) + baseURLEnd)
 data = response.json()
 style = data['slides'][0]['lines'][0]['style']
 
