@@ -1,5 +1,4 @@
 import requests
-import json
 from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
 from font_fredoka_one import FredokaOne
