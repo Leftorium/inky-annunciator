@@ -21,7 +21,7 @@ def withMember():
     while z > i:
         holder.append(data['slides'][0]['lines'][i]['content'])
         i += 1
-    string = ' '.join(holder).title()
+    string = ' '.join(holder).title().strip()
     return string
 
 
@@ -33,7 +33,7 @@ def noMember():
     while y > i:
         holder.append(data['slides'][0]['lines'][i]['content'])
         i += 1
-    string = ' '.join(holder).title()
+    string = ' '.join(holder).title().strip()
     return string
 
 
@@ -45,7 +45,7 @@ def committeeMeetings():
     while y > i:
         holder.append(data['slides'][0]['lines'][i]['content'])
         i += 2
-    string = ', '.join(holder).title()
+    string = ', '.join(holder).title().strip()
     return string
 
 
