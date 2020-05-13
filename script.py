@@ -3,7 +3,7 @@ from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
 from font_fredoka_one import FredokaOne
 # Get the current message on the annunciator
-baseURLhost = 'https://dm-devci-annunciator-services.azurewebsites.net'
+baseURLhost = 'https://parliamentnow-api.parliament.uk'
 baseURLAPIBit = '/api/Message/message/'
 baseURLEnd = '/current'
 house = 0
