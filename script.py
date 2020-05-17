@@ -8,6 +8,7 @@ baseURLAPIBit = '/api/Message/message/'
 baseURLEnd = '/current'
 house = 0
 response = requests.get(baseURLhost + baseURLAPIBit + str(house) + baseURLEnd)
+responseCode = response.status_code 
 data = response.json()
 style = data['slides'][0]['lines'][0]['style']
 
@@ -49,7 +50,9 @@ def committeeMeetings():
     return string
 
 
-if style == 16:
+if responseCode != 200:
+    message = (str(response.status_code))
+elif style == 16:
     message = "Today's Committeess: " + committeeMeetings()
 elif data['slides'][0]['lines'][-1]['member'] is None:
     message = noMember()
