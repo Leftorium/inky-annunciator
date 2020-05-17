@@ -8,7 +8,7 @@ baseURLAPIBit = '/api/Message/message/'
 baseURLEnd = '/current'
 house = 0
 response = requests.get(baseURLhost + baseURLAPIBit + str(house) + baseURLEnd)
-responseCode = response.status_code 
+responseCode = response.status_code
 data = response.json()
 style = data['slides'][0]['lines'][0]['style']
 
