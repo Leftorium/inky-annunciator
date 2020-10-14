@@ -1,4 +1,4 @@
-# Inky Annunicator
+# Inky Annunciator
 
 ![Lint](https://github.com/Leftorium/inky-annunicator/workflows/Lint/badge.svg?branch=master)
 
