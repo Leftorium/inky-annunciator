@@ -6,58 +6,35 @@ from font_fredoka_one import FredokaOne
 baseURLhost = 'https://now-api.parliament.uk'
 baseURLAPIBit = '/api/Message/message/'
 baseURLEnd = '/current'
-house = 0
-response = requests.get(baseURLhost + baseURLAPIBit + str(house) + baseURLEnd)
+house = 'CommonsMain'
+response = requests.get(baseURLhost + baseURLAPIBit + house + baseURLEnd, timeout=10)
 responseCode = response.status_code
 data = response.json()
 style = data['slides'][0]['lines'][0]['style']
 
 
-def withMember():
-    x = data['slides'][0]['lines']
-    y = len(x)
-    z = y - 1
-    i = 0
-    holder = []
-    while z > i:
-        holder.append(data['slides'][0]['lines'][i]['content'])
-        i += 1
-    string = ' '.join(holder).title().strip()
-    return string
+WESTMINSTER_HALL_STYLE = 'WestminsterHallInfo'
 
 
-def noMember():
-    x = data['slides'][0]['lines']
-    y = len(x)
-    i = 0
-    holder = []
-    while y > i:
-        holder.append(data['slides'][0]['lines'][i]['content'])
-        i += 1
-    string = ' '.join(holder).title().strip()
-    return string
+def get_lines_text(skip_last=False):
+    lines = data['slides'][0]['lines']
+    selected = lines[:-1] if skip_last else lines
+    return ' '.join(line['content'] for line in selected).title().strip()
 
 
-def committeeMeetings():
-    x = data['slides'][0]['lines']
-    y = len(x)
-    i = 0
-    holder = []
-    while y > i:
-        holder.append(data['slides'][0]['lines'][i]['content'])
-        i += 2
-    string = ', '.join(holder).title().strip()
-    return string
+def westminster_hall():
+    lines = data['slides'][0]['lines']
+    return ', '.join(lines[i]['content'] for i in range(0, len(lines), 2)).title().strip()
 
 
 if responseCode != 200:
-    message = (str(response.status_code))
-elif style == 16:
-    message = "Today's Committeess: " + committeeMeetings()
+    message = str(response.status_code)
+elif style == WESTMINSTER_HALL_STYLE:
+    message = "Westminster Hall: " + westminster_hall()
 elif data['slides'][0]['lines'][-1]['member'] is None:
-    message = noMember()
+    message = get_lines_text()
 else:
-    message = withMember()
+    message = get_lines_text(skip_last=True)
 
 # Inky section shamelessly stolen from their guide
 # https://learn.pimoroni.com/tutorial/sandyj/getting-started-with-inky-phat
@@ -66,9 +43,6 @@ inky_display.set_border(inky_display.WHITE)
 img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
 draw = ImageDraw.Draw(img)
 font = ImageFont.truetype(FredokaOne, 16)
-w, h = font.getsize(message)
-x = (inky_display.WIDTH / 2) - (w / 2)
-y = (inky_display.HEIGHT / 2) - (h / 2)
 
 # Reflow function from
 # https://github.com/pimoroni/inky/blob/master/examples/what/quotes-what.py
@@ -81,7 +55,7 @@ def reflow_text(quote, width, font):
 
     for i in range(len(words)):
         word = words[i] + " "
-        word_length = font.getsize(word)[0]
+        word_length = font.getlength(word)
         line_length += word_length
 
         if line_length < width:
