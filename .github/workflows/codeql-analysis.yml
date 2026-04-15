@@ -2,44 +2,39 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [master]
+    [span_2](start_span)branches: [ "master" ] # Based on your main branch name[span_2](end_span)
   pull_request:
-    branches: [master]
+    # [span_3](start_span)The logs show this was triggered by a pull request[span_3](end_span)
+    branches: [ "master" ]
   schedule:
-    - cron: '0 1 * * 2'
+    - cron: '30 1 * * 0' # Weekly scan is a best practice
 
 jobs:
   analyze:
-    name: Analyze
+    name: Analyze (python)
     runs-on: ubuntu-latest
     permissions:
+      # [span_4](start_span)These match the permissions seen in your runner logs[span_4](end_span)
       actions: read
       contents: read
       security-events: write
 
-    strategy:
-      fail-fast: false
-      matrix:
-        # Action v4 continues to support these languages
-        language: ['python']
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4 # Updated from v2
-      with:
-        fetch-depth: 0 # Recommended for better deep analysis
+      - name: Checkout repository
+        [span_5](start_span)uses: actions/checkout@v4 #[span_5](end_span)
+        with:
+          fetch-depth: 0
 
-    # Initializes the CodeQL tools for scanning.
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v4 # Use @v3 or @v4
-      with:
-        languages: ${{ matrix.language }}
-        # New Feature: build-mode can simplify analysis for many languages
-        # build-mode: none 
+      # [span_6](start_span)Initializes CodeQL tools[span_6](end_span)
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4 
+        with:
+          [span_7](start_span)languages: python #[span_7](end_span)
 
-    # Autobuild is still supported but version must be updated
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v3
+      # [span_8](start_span)[span_9](start_span)Synchronized to v4 to fix the version mismatch error[span_8](end_span)[span_9](end_span)
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v4 
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+      # Final analysis step
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
