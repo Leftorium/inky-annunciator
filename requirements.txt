@@ -1,4 +1,4 @@
-requests==2.34.1
+requests==2.34.2
 inky==2.4.0; sys_platform == 'linux'
 urllib3>=2.7.0 # not directly required, pinned by Snyk to avoid a vulnerability
 numpy>=2.4.4 # not directly required, pinned by Snyk to avoid a vulnerability
